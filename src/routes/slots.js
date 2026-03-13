@@ -32,7 +32,7 @@ router.post('/', requireRole('manager', 'admin'), async (req, res, next) => {
     for (const s of slots) {
       if (!s.branchId || !s.serviceTypeId || !s.date || !s.startTime || !s.endTime) {
         return res.status(400).json({
-          error: 'Each slot needs branchId, serviceTypeId, date, startTime, and endTime'
+          error: 'Each slot needs branchId, serviceTypeId, date, startTime, and enddTime'
         });
       }
     }
