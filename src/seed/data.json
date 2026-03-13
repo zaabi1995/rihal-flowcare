@@ -1,0 +1,78 @@
+{
+  "branches": [
+    {
+      "name": "FlowCare Al Khuwair",
+      "location": "Muscat, Al Khuwair",
+      "phone": "+968 2456 7890"
+    },
+    {
+      "name": "FlowCare Salalah",
+      "location": "Salalah, City Center",
+      "phone": "+968 2329 8765"
+    }
+  ],
+  "services": [
+    {
+      "name": "General Consultation",
+      "description": "General health check-up and consultation",
+      "durationMinutes": 30,
+      "price": "5.000"
+    },
+    {
+      "name": "Dental",
+      "description": "Dental examination and cleaning",
+      "durationMinutes": 45,
+      "price": "15.000"
+    },
+    {
+      "name": "Eye Care",
+      "description": "Vision test and eye examination",
+      "durationMinutes": 30,
+      "price": "10.000"
+    },
+    {
+      "name": "Lab Work",
+      "description": "Blood tests and lab analysis",
+      "durationMinutes": 20,
+      "price": "8.500"
+    }
+  ],
+  "admin": {
+    "name": "System Admin",
+    "email": "admin",
+    "password": "admin123",
+    "role": "admin"
+  },
+  "customers": [
+    {
+      "name": "Ahmed Al Balushi",
+      "email": "ahmed@example.com",
+      "password": "pass123",
+      "phone": "+968 9912 3456"
+    },
+    {
+      "name": "Fatima Al Harthi",
+      "email": "fatima@example.com",
+      "password": "pass123",
+      "phone": "+968 9923 4567"
+    },
+    {
+      "name": "Mohammed Al Lawati",
+      "email": "mohammed@example.com",
+      "password": "pass123",
+      "phone": "+968 9934 5678"
+    },
+    {
+      "name": "Maryam Al Riyami",
+      "email": "maryam@example.com",
+      "password": "pass123",
+      "phone": "+968 9945 6789"
+    },
+    {
+      "name": "Khalid Al Kindi",
+      "email": "khalid@example.com",
+      "password": "pass123",
+      "phone": "+968 9956 7890"
+    }
+  ]
+}
