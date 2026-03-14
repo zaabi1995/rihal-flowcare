@@ -5,7 +5,7 @@
 ![Showcase](screenshots/showcase-hero.png)
 ![Challenges](screenshots/showcase-challenges.png)
 
-**Live API:** [alizaabi.om/rihal-codestack/flowcare-api/health](https://alizaabi.om/rihal-codestack/flowcare-api/health) | **API Docs (Swagger):** [localhost:3000/api-docs](http://localhost:3000/api-docs) | **API Explorer:** [alizaabi.om/rihal-codestack/flowcare.html](https://alizaabi.om/rihal-codestack/flowcare.html)
+**Live API:** [alizaabi.om/rihal-codestack/flowcare-api/health](https://alizaabi.om/rihal-codestack/flowcare-api/health) | **Swagger UI:** [alizaabi.om/.../api-docs](https://alizaabi.om/rihal-codestack/flowcare-api/api-docs/) | **Showcase:** [alizaabi.om/rihal-codestack/flowcare.html](https://alizaabi.om/rihal-codestack/flowcare.html)
 
 ---
 
@@ -15,10 +15,23 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Tests](https://img.shields.io/badge/Tests-46%20passing-brightgreen?style=for-the-badge)
+![Live](https://img.shields.io/badge/Status-Live%20%E2%9C%93-success?style=for-the-badge)
 
 A production-ready REST API for managing healthcare clinic queues, appointments, and staff — built for the **Rihal CODESTACKER 2026** competition.
 
 ---
+
+## Screenshots
+
+### Swagger UI — Interactive API Documentation (26+ Endpoints)
+
+![Swagger UI](screenshots/swagger-full.png)
+
+### Live API Response
+
+![API Response](screenshots/api-branches-response.png)
+
+### Showcase Page
 
 ![FlowCare Showcase](screenshots/flowcare-showcase.png)
 
