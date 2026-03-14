@@ -6,7 +6,29 @@ const { logAudit } = require('../middleware/audit');
 
 router.use(authenticate);
 
-// GET /api/staff - list staff
+/**
+ * @swagger
+ * /api/staff:
+ *   get:
+ *     tags: [Staff]
+ *     summary: List staff members
+ *     security:
+ *       - basicAuth: []
+ *     description: Admin sees all staff. Manager sees only their branch staff.
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema: { type: integer, default: 1 }
+ *       - in: query
+ *         name: pageSize
+ *         schema: { type: integer, default: 20 }
+ *       - in: query
+ *         name: search
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: Paginated staff with their assigned service types
+ */
 router.get('/', requireRole('admin', 'manager'), async (req, res, next) => {
   try {
     const where = {};
@@ -49,7 +71,35 @@ router.get('/', requireRole('admin', 'manager'), async (req, res, next) => {
   }
 });
 
-// POST /api/staff/:id/services - assign staff to service types
+/**
+ * @swagger
+ * /api/staff/{id}/services:
+ *   post:
+ *     tags: [Staff]
+ *     summary: Assign staff to service types
+ *     security:
+ *       - basicAuth: []
+ *     description: Replaces existing assignments. Manager can only assign within their branch.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string, format: uuid }
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [serviceTypeIds]
+ *             properties:
+ *               serviceTypeIds:
+ *                 type: array
+ *                 items: { type: string, format: uuid }
+ *     responses:
+ *       200:
+ *         description: Staff updated with new service assignments
+ */
 router.post('/:id/services', requireRole('admin', 'manager'), async (req, res, next) => {
   try {
     const staff = await Staff.findByPk(req.params.id);

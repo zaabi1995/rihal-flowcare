@@ -20,7 +20,17 @@ const customerRoutes = require('./routes/customers');
 const auditLogRoutes = require('./routes/auditLogs');
 const adminRoutes = require('./routes/admin');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
+
 const app = express();
+
+// Swagger API documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'FlowCare API Documentation',
+}));
+app.get('/api-docs.json', (req, res) => res.json(swaggerSpec));
 
 // global rate limit - 100 requests per 15 min per IP
 const limiter = rateLimit({

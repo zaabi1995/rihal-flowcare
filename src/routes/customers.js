@@ -7,7 +7,28 @@ const { Op } = require('sequelize');
 router.use(authenticate);
 router.use(requireRole('admin'));
 
-// GET /api/customers - admin only
+/**
+ * @swagger
+ * /api/customers:
+ *   get:
+ *     tags: [Customers]
+ *     summary: List all customers (Admin only)
+ *     security:
+ *       - basicAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema: { type: integer, default: 1 }
+ *       - in: query
+ *         name: pageSize
+ *         schema: { type: integer, default: 20 }
+ *       - in: query
+ *         name: search
+ *         schema: { type: string }
+ *     responses:
+ *       200:
+ *         description: Paginated customer list
+ */
 router.get('/', async (req, res, next) => {
   try {
     const { page = 1, pageSize = 20, search } = req.query;
@@ -41,7 +62,25 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET /api/customers/:id - with ID image path
+/**
+ * @swagger
+ * /api/customers/{id}:
+ *   get:
+ *     tags: [Customers]
+ *     summary: Get customer details including ID image
+ *     security:
+ *       - basicAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: string, format: uuid }
+ *     responses:
+ *       200:
+ *         description: Customer profile with ID image path
+ *       404:
+ *         description: Customer not found
+ */
 router.get('/:id', async (req, res, next) => {
   try {
     const customer = await Customer.findByPk(req.params.id, {
