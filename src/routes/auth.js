@@ -4,7 +4,7 @@ const { Customer, Staff } = require('../models');
 const { uploadIdWithValidation } = require('../middleware/upload');
 const { authenticate } = require('../middleware/auth');
 
-// POST /api/auth/register — customer registration
+// POST /api/auth/register - customer registration
 router.post('/register', uploadIdWithValidation, async (req, res, next) => {
   try {
     const { name, email, password, phone } = req.body;
@@ -41,7 +41,7 @@ router.post('/register', uploadIdWithValidation, async (req, res, next) => {
   }
 });
 
-// POST /api/auth/login — basic auth login
+// POST /api/auth/login - basic auth login
 router.post('/login', authenticate, async (req, res) => {
   // if we get here, auth middleware already validated credentials
   res.json({

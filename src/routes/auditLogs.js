@@ -6,7 +6,7 @@ const auditService = require('../services/auditService');
 router.use(authenticate);
 router.use(requireRole('admin', 'manager'));
 
-// GET /api/audit-logs — list audit logs
+// GET /api/audit-logs - list audit logs
 router.get('/', async (req, res, next) => {
   try {
     const { page, pageSize, search } = req.query;
@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// POST /api/audit-logs/export — CSV export (admin only)
+// POST /api/audit-logs/export - CSV export (admin only)
 router.post('/export', requireRole('admin'), async (req, res, next) => {
   try {
     const csv = await auditService.exportAuditCSV();

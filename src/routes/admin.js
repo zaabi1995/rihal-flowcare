@@ -7,7 +7,7 @@ const config = require('../config/config');
 router.use(authenticate);
 router.use(requireRole('admin'));
 
-// POST /api/admin/soft-delete-retention — configure retention days
+// POST /api/admin/soft-delete-retention - configure retention days
 router.post('/soft-delete-retention', async (req, res, next) => {
   try {
     const { days } = req.body;
@@ -27,7 +27,7 @@ router.post('/soft-delete-retention', async (req, res, next) => {
   }
 });
 
-// POST /api/admin/cleanup — manually trigger cleanup
+// POST /api/admin/cleanup - manually trigger cleanup
 router.post('/cleanup', async (req, res, next) => {
   try {
     const result = await cleanupExpiredSlots(req.user.id);

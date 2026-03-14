@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Branch, ServiceType, Slot, Staff } = require('../models');
 const { getAvailableSlots } = require('../services/slotService');
 
-// GET /api/branches — list all branches
+// GET /api/branches - list all branches
 router.get('/branches', async (req, res, next) => {
   try {
     const branches = await Branch.findAll({
@@ -14,7 +14,7 @@ router.get('/branches', async (req, res, next) => {
   }
 });
 
-// GET /api/branches/:id/services — services for a branch
+// GET /api/branches/:id/services - services for a branch
 router.get('/branches/:id/services', async (req, res, next) => {
   try {
     const services = await ServiceType.findAll({
@@ -27,7 +27,7 @@ router.get('/branches/:id/services', async (req, res, next) => {
   }
 });
 
-// GET /api/slots/available — find open slots
+// GET /api/slots/available - find open slots
 router.get('/slots/available', async (req, res, next) => {
   try {
     const { branchId, serviceTypeId, date } = req.query;

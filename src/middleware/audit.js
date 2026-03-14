@@ -1,6 +1,6 @@
 const { AuditLog } = require('../models');
 
-// log an audit event — called from services, not as express middleware
+// log an audit event - called from services, not as express middleware
 async function logAudit({ action, actorId, actorRole, targetType, targetId, branchId, metadata }) {
   try {
     await AuditLog.create({

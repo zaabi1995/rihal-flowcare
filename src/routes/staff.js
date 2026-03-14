@@ -6,7 +6,7 @@ const { logAudit } = require('../middleware/audit');
 
 router.use(authenticate);
 
-// GET /api/staff — list staff
+// GET /api/staff - list staff
 router.get('/', requireRole('admin', 'manager'), async (req, res, next) => {
   try {
     const where = {};
@@ -49,7 +49,7 @@ router.get('/', requireRole('admin', 'manager'), async (req, res, next) => {
   }
 });
 
-// POST /api/staff/:id/services — assign staff to service types
+// POST /api/staff/:id/services - assign staff to service types
 router.post('/:id/services', requireRole('admin', 'manager'), async (req, res, next) => {
   try {
     const staff = await Staff.findByPk(req.params.id);

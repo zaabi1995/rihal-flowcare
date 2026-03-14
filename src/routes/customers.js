@@ -7,7 +7,7 @@ const { Op } = require('sequelize');
 router.use(authenticate);
 router.use(requireRole('admin'));
 
-// GET /api/customers — admin only
+// GET /api/customers - admin only
 router.get('/', async (req, res, next) => {
   try {
     const { page = 1, pageSize = 20, search } = req.query;
@@ -41,7 +41,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET /api/customers/:id — with ID image path
+// GET /api/customers/:id - with ID image path
 router.get('/:id', async (req, res, next) => {
   try {
     const customer = await Customer.findByPk(req.params.id, {

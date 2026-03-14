@@ -1,6 +1,6 @@
-# FlowCare API — Smart Healthcare Queue Management
+# FlowCare API - Smart Healthcare Queue Management
 
-> **[View All Submissions — alizaabi.om/rihal-codestack](https://alizaabi.om/rihal-codestack/)**
+> **[View All Submissions - alizaabi.om/rihal-codestack](https://alizaabi.om/rihal-codestack/)**
 
 ![Showcase](screenshots/showcase-hero.png)
 ![Challenges](screenshots/showcase-challenges.png)
@@ -15,7 +15,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-A production-ready REST API for managing healthcare clinic queues, appointments, and staff — built for the **Rihal CODESTACKER 2026** competition.
+A production-ready REST API for managing healthcare clinic queues, appointments, and staff - built for the **Rihal CODESTACKER 2026** competition.
 
 ---
 
@@ -26,14 +26,14 @@ A production-ready REST API for managing healthcare clinic queues, appointments,
 ## Features
 
 - **26+ REST endpoints** covering the full appointment lifecycle
-- **4-role RBAC** — Admin, Manager, Staff, Customer — with JWT authentication
-- **Queue management** — real-time queue position, status tracking, and slot-based scheduling
+- **4-role RBAC** - Admin, Manager, Staff, Customer - with JWT authentication
+- **Queue management** - real-time queue position, status tracking, and slot-based scheduling
 - **Slot management** with conflict detection to prevent double-booking
-- **Audit logging** — every write operation logged, with CSV export
+- **Audit logging** - every write operation logged, with CSV export
 - **Soft deletes** with 30-day retention and automatic cleanup
-- **Rate limiting** — 100 requests per 15-minute window per IP
+- **Rate limiting** - 100 requests per 15-minute window per IP
 - **File uploads** with type and size validation
-- **2 seeded branches** — Al Khuwair (Muscat) and Salalah — with realistic demo data
+- **2 seeded branches** - Al Khuwair (Muscat) and Salalah - with realistic demo data
 - **7 data models** for a complete healthcare domain
 
 ---
@@ -159,11 +159,86 @@ curl http://localhost:3000/api/health
 | `DB_NAME` | `flowcare` | Database name |
 | `DB_USER` | `postgres` | Database user |
 | `DB_PASS` | `postgres` | Database password |
-| `JWT_SECRET` | — | JWT signing secret |
+| `JWT_SECRET` | - | JWT signing secret |
 | `RATE_LIMIT_WINDOW_MS` | `900000` | Rate limit window (15 min) |
 | `RATE_LIMIT_MAX` | `100` | Max requests per window |
 
 ---
+
+# List slots (admin can add ?includeDeleted=true)
+curl http://localhost:3000/api/slots \
+  -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)"
+
+# Soft delete
+curl -X DELETE http://localhost:3000/api/slots/{id} \
+  -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)"
+```
+
+### Staff & Customers
+
+```bash
+# List staff
+curl http://localhost:3000/api/staff \
+  -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)"
+
+# Assign staff to services
+curl -X POST http://localhost:3000/api/staff/{staffId}/services \
+  -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)" \
+  -H "Content-Type: application/json" \
+  -d '{"serviceTypeIds": ["service-uuid-1", "service-uuid-2"]}'
+
+# List customers (admin only)
+curl http://localhost:3000/api/customers \
+  -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)"
+```
+
+### Audit Logs
+
+```bash
+# View logs (admin: all, manager: branch only)
+curl http://localhost:3000/api/audit-logs \
+  -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)"
+
+# Export CSV (admin only)
+curl -X POST http://localhost:3000/api/audit-logs/export \
+  -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)" \
+  --output audit-logs.csv
+```
+
+### Admin
+
+```bash
+# Set retention period
+curl -X POST http://localhost:3000/api/admin/soft-delete-retention \
+  -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)" \
+  -H "Content-Type: application/json" \
+  -d '{"days": 14}'
+
+# Run cleanup manually
+curl -X POST http://localhost:3000/api/admin/cleanup \
+  -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)"
+```
+
+## Pagination & Search
+
+All list endpoints support:
+- `?page=1&pageSize=20` - pagination
+- `?search=term` - case-insensitive search
+
+Response format:
+```json
+{
+  "results": [...],
+  "total": 42,
+  "page": 1,
+  "pageSize": 20
+}
+```
+
+## Rate Limiting
+
+- Global: 100 requests per 15 minutes per IP
+- Booking: Max 3 appointments per hour per customer
 
 ## Roles
 
@@ -190,11 +265,11 @@ The seed script creates:
 ## Author
 
 **Ali Al Zaabi**
-Built for Rihal CODESTACKER 2026 — Challenge #2: Backend / Software Engineering
+Built for Rihal CODESTACKER 2026 - Challenge #2: Backend / Software Engineering
 
 ---
 
 ## Other Challenges
-- [Visit Oman](https://github.com/zaabi1995/rihal-visit-oman) — Challenge #1: Frontend Development
-- [DE Pipeline](https://github.com/zaabi1995/rihal-de-pipeline) — Challenge #4: Data Engineering
-- [Muscat 2040](https://github.com/zaabi1995/rihal-muscat-2040) — Challenge #6: Data Analytics
+- [Visit Oman](https://github.com/zaabi1995/rihal-visit-oman) - Challenge #1: Frontend Development
+- [DE Pipeline](https://github.com/zaabi1995/rihal-de-pipeline) - Challenge #4: Data Engineering
+- [Muscat 2040](https://github.com/zaabi1995/rihal-muscat-2040) - Challenge #6: Data Analytics

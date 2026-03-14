@@ -7,7 +7,7 @@ const appointmentService = require('../services/appointmentService');
 // all routes need auth
 router.use(authenticate);
 
-// POST /api/appointments — book an appointment (customer only)
+// POST /api/appointments - book an appointment (customer only)
 router.post('/', requireRole('customer'), uploadAttachmentOptional, async (req, res, next) => {
   try {
     const { slotId, notes } = req.body;
@@ -28,7 +28,7 @@ router.post('/', requireRole('customer'), uploadAttachmentOptional, async (req, 
   }
 });
 
-// GET /api/appointments — list (scoped by role)
+// GET /api/appointments - list (scoped by role)
 router.get('/', async (req, res, next) => {
   try {
     const { page, pageSize, search } = req.query;
@@ -44,7 +44,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET /api/appointments/:id — single appointment
+// GET /api/appointments/:id - single appointment
 router.get('/:id', async (req, res, next) => {
   try {
     const appointment = await appointmentService.getAppointment(req.params.id, req.user);
@@ -54,7 +54,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// DELETE /api/appointments/:id — cancel (customer cancels own)
+// DELETE /api/appointments/:id - cancel (customer cancels own)
 router.delete('/:id', requireRole('customer', 'admin'), async (req, res, next) => {
   try {
     const result = await appointmentService.cancelAppointment(req.params.id, req.user);
@@ -64,7 +64,7 @@ router.delete('/:id', requireRole('customer', 'admin'), async (req, res, next) =
   }
 });
 
-// PUT /api/appointments/:id — reschedule to different slot
+// PUT /api/appointments/:id - reschedule to different slot
 router.put('/:id', requireRole('customer', 'admin'), async (req, res, next) => {
   try {
     const { slotId } = req.body;
@@ -83,7 +83,7 @@ router.put('/:id', requireRole('customer', 'admin'), async (req, res, next) => {
   }
 });
 
-// PATCH /api/appointments/:id/status — update status (staff/manager/admin)
+// PATCH /api/appointments/:id/status - update status (staff/manager/admin)
 router.patch('/:id/status', requireRole('staff', 'manager', 'admin'), async (req, res, next) => {
   try {
     const { status, notes } = req.body;

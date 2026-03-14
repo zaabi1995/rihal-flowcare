@@ -5,7 +5,7 @@ const slotService = require('../services/slotService');
 
 router.use(authenticate);
 
-// GET /api/slots — list slots (manager/admin)
+// GET /api/slots - list slots (manager/admin)
 router.get('/', requireRole('manager', 'admin'), async (req, res, next) => {
   try {
     const { includeDeleted, page, pageSize, search } = req.query;
@@ -22,7 +22,7 @@ router.get('/', requireRole('manager', 'admin'), async (req, res, next) => {
   }
 });
 
-// POST /api/slots — create slot(s) (manager/admin)
+// POST /api/slots - create slot(s) (manager/admin)
 router.post('/', requireRole('manager', 'admin'), async (req, res, next) => {
   try {
     const data = req.body;
@@ -44,7 +44,7 @@ router.post('/', requireRole('manager', 'admin'), async (req, res, next) => {
   }
 });
 
-// PUT /api/slots/:id — update slot
+// PUT /api/slots/:id - update slot
 router.put('/:id', requireRole('manager', 'admin'), async (req, res, next) => {
   try {
     const slot = await slotService.updateSlot(req.params.id, req.body, req.user);
@@ -54,7 +54,7 @@ router.put('/:id', requireRole('manager', 'admin'), async (req, res, next) => {
   }
 });
 
-// DELETE /api/slots/:id — soft delete
+// DELETE /api/slots/:id - soft delete
 router.delete('/:id', requireRole('manager', 'admin'), async (req, res, next) => {
   try {
     const result = await slotService.softDeleteSlot(req.params.id, req.user);

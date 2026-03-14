@@ -22,7 +22,7 @@ const adminRoutes = require('./routes/admin');
 
 const app = express();
 
-// global rate limit — 100 requests per 15 min per IP
+// global rate limit - 100 requests per 15 min per IP
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
